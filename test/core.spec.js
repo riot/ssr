@@ -13,9 +13,15 @@ describe('ssr', () => {
     unregister()
   })
 
-  it('the core gets properly exported', function() {
+  it('raw components can be rendered', function() {
     const SimpleComponent = require('./tags/simple-component.riot').default
 
-    expect(render('my-component', SimpleComponent, {message: 'hello'})).to.match(/hello/)
+    expect(render('my-component', SimpleComponent, {message: 'hello'})).to.match(/<p>hello/)
+  })
+
+  it('nested components can be rendered', function() {
+    const ParentComponent = require('./tags/parent-component.riot').default
+
+    expect(render('my-component', ParentComponent)).to.match(/<p>hello/)
   })
 })
