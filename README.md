@@ -28,5 +28,5 @@ const MyComponent = require('./my-component.riot')
 const render = require('@riotjs/ssr')
 
 
-render(MyComponent, { some: 'initial props' }) // it will return your component markup
+render('my-component', MyComponent, { some: 'initial props' }) // it will return your component markup
 ```
