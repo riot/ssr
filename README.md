@@ -24,7 +24,7 @@ unregister()
 Once the hook will be registered you can render your components tags:
 
 ```js
-const MyComponent = require('./my-component.riot')
+const MyComponent = require('./my-component.riot').default
 const render = require('@riotjs/ssr')
 
 
