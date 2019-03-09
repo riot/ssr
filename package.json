@@ -1,9 +1,10 @@
 {
   "name": "@riotjs/ssr",
-  "version": "0.1.0",
+  "version": "4.0.0-beta.1",
   "description": "Riot module to render riot components on the server",
   "main": "index.js",
   "scripts": {
+    "prepare": "npm i --no-save riot@4.0.0-beta.1 @riotjs/compiler@4.0.0-beta.1",
     "test": "npm run lint && mocha test/*.spec.js",
     "lint": "eslint *.js test"
   },
@@ -25,18 +26,20 @@
   },
   "homepage": "https://github.com/riot/ssr#readme",
   "dependencies": {
-    "@babel/core": "^7.2.2",
-    "@riotjs/compiler": "^4.0.0-alpha.17",
+    "@babel/core": "^7.3.4",
     "jsdom": "^13.2.0",
     "jsdom-global": "^3.0.2",
-    "pirates": "^4.0.1",
-    "riot": "^4.0.0-alpha.8"
+    "pirates": "^4.0.1"
+  },
+  "peerDependencies": {
+    "@riotjs/compiler": "^4.0.0-beta.1",
+    "riot": "^4.0.0-beta.1"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-env": "^7.3.4",
     "chai": "^4.2.0",
-    "eslint": "^5.12.1",
+    "eslint": "^5.15.1",
     "eslint-config-riot": "^2.0.0",
-    "mocha": "^5.2.0"
+    "mocha": "^6.0.2"
   }
 }

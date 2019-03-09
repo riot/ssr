@@ -4,7 +4,7 @@ Riot module to render riot components on the server
 # Installation
 
 ```
-npm i -S @riotjs/ssr
+npm i -S riot @riotjs/compiler @riotjs/ssr
 ```
 
 # Usage

@@ -1,10 +1,10 @@
 require('./register')
-const {__} = require('riot')
+const riot = require('riot')
 
 module.exports = function render(tagName, component, props) {
   const cleanup = require('jsdom-global')()
   const root = document.createElement(tagName)
-  const element = __.defineComponent(component)({props}).mount(root)
+  const element = riot.component(component)(root, props)
 
   const html = element.root.outerHTML
 
