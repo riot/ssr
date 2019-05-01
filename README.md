@@ -1,6 +1,12 @@
 # ssr
 Riot module to render riot components on the server
 
+[![Build Status][travis-image]][travis-url]
+
+[![NPM version][npm-version-image]][npm-url]
+[![NPM downloads][npm-downloads-image]][npm-url]
+[![MIT License][license-image]][license-url]
+
 # Installation
 
 ```
@@ -42,3 +48,13 @@ import MyComponent from './my-component.riot' // it works!
 // normally you will not need to call this function but if you want you can unhook the riot loader
 unregister()
 ```
+
+[travis-image]:https://img.shields.io/travis/riot/ssr.svg?style=flat-square
+[travis-url]:https://travis-ci.org/riot/ssr
+
+[license-image]:http://img.shields.io/badge/license-MIT-000000.svg?style=flat-square
+[license-url]:LICENSE
+
+[npm-version-image]:http://img.shields.io/npm/v/@riotjs/ssr.svg?style=flat-square
+[npm-downloads-image]:http://img.shields.io/npm/dm/@riotjs/ssr.svg?style=flat-square
+[npm-url]:https://npmjs.org/package/@riotjs/ssr
