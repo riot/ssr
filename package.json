@@ -1,6 +1,6 @@
 {
   "name": "@riotjs/ssr",
-  "version": "4.0.0-rc.1",
+  "version": "4.0.0-rc.2",
   "description": "Riot module to render riot components on the server",
   "main": "index.js",
   "files": [
