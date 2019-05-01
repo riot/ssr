@@ -3,6 +3,11 @@
   "version": "4.0.0-beta.1",
   "description": "Riot module to render riot components on the server",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "register.js",
+    "src"
+  ]
   "scripts": {
     "prepare": "npm i --no-save riot@4.0.0-rc.5 @riotjs/compiler",
     "build-core": "npx rollup -f cjs -i src/index.js -o index.js",
