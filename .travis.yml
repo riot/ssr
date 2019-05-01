@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - 10
+
+branches:
+  only:
+    - master
+
+sudo: false
+
+
+cache:
+  directories:
+    - node_modules
+
+notifications:
+    email: false
