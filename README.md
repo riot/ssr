@@ -15,7 +15,7 @@ npm i -S riot @riotjs/compiler @riotjs/ssr
 
 # Usage
 
-### render
+### render - to render only markup
 
 You can simply render your components markup as it follows:
 
@@ -26,7 +26,7 @@ import render from '@riotjs/ssr'
 const html = render('my-component', MyComponent, { some: 'initial props' })
 ```
 
-### fragments
+### fragments - to render html and css
 
 You can also extract the rendered `html` and `css` separately using the `fragments` function:
 
@@ -37,7 +37,7 @@ import {fragments} from '@riotjs/ssr'
 const {html, css} = fragments('my-component', MyComponent, { some: 'initial props' })
 ```
 
-### register
+### register - to load riot components in node
 
 If you only want load your components source code in a node environement you just need to register the riot loader hook:
 
