@@ -3,7 +3,7 @@ import {__, component} from 'riot'
 import curry from 'curri'
 import jsDOMGlobal from 'jsdom-global'
 
-const { CSS_BY_NAME } = __.cssManager
+const {CSS_BY_NAME} = __.cssManager
 
 /**
  * Create the renderer function that can produce different types of output from the DOM rendered
