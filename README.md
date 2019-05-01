@@ -12,7 +12,7 @@ npm i -S riot @riotjs/compiler @riotjs/ssr
 To render your components in a node environement you will need to register the riot loader hooks first:
 
 ```js
-const register = require('@riotjs/ssr/register')
+import register from '@riotjs/ssr/register'
 
 // from now on you can load `.riot` tags in node
 const unregister = register()
@@ -24,9 +24,17 @@ unregister()
 Once the hook will be registered you can render your components tags:
 
 ```js
-const MyComponent = require('./my-component.riot').default
-const render = require('@riotjs/ssr')
+import MyComponent from './my-component.riot'
+import render from '@riotjs/ssr'
 
+const html = render('my-component', MyComponent, { some: 'initial props' })
+```
 
-render('my-component', MyComponent, { some: 'initial props' }) // it will return your component markup
+You can extract also the rendered `html` and `css` separately using the `fragments` function
+
+```js
+import MyComponent from './my-component.riot'
+import {fragments} from '@riotjs/ssr'
+
+const {html, css} = fragments('my-component', MyComponent, { some: 'initial props' })
 ```

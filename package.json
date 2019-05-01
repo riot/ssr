@@ -4,9 +4,14 @@
   "description": "Riot module to render riot components on the server",
   "main": "index.js",
   "scripts": {
-    "prepare": "npm i --no-save riot@4.0.0-beta.1 @riotjs/compiler@4.0.0-beta.1",
+    "prepare": "npm i --no-save riot@4.0.0-rc.5 @riotjs/compiler",
+    "build-core": "npx rollup -f cjs -i src/index.js -o index.js",
+    "build-register": "npx rollup -f cjs -i src/register.js -o register.js",
+    "build": "npm run build-core && npm run build-register",
+    "prepublishOnly": "npm test",
+    "pretest": "npm run build",
     "test": "npm run lint && mocha test/*.spec.js",
-    "lint": "eslint *.js test"
+    "lint": "eslint src/*.js test"
   },
   "repository": {
     "type": "git",
@@ -26,20 +31,22 @@
   },
   "homepage": "https://github.com/riot/ssr#readme",
   "dependencies": {
-    "@babel/core": "^7.3.4",
-    "jsdom": "^13.2.0",
+    "@babel/core": "^7.4.4",
+    "curri": "^1.0.1",
+    "jsdom": "^15.0.0",
     "jsdom-global": "^3.0.2",
     "pirates": "^4.0.1"
   },
   "peerDependencies": {
-    "@riotjs/compiler": "^4.0.0-beta.1",
-    "riot": "^4.0.0-beta.1"
+    "@riotjs/compiler": "^4.0.0",
+    "riot": "^4.0.0-rc.5"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-env": "^7.4.4",
     "chai": "^4.2.0",
-    "eslint": "^5.15.1",
+    "eslint": "^5.16.0",
     "eslint-config-riot": "^2.0.0",
-    "mocha": "^6.0.2"
+    "mocha": "^6.1.4",
+    "rollup": "^1.10.1"
   }
 }

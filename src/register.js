@@ -1,13 +1,11 @@
-'use strict';
-
-const {addHook} = require('pirates');
-const {transform} = require('@babel/core');
-const {compile} = require('@riotjs/compiler');
+const {addHook} = require('pirates')
+const {transform} = require('@babel/core')
+const {compile} = require('@riotjs/compiler')
 
 // returns the teardown function
-var register = () => addHook(
+export default () => addHook(
   function(source, filename) {
-    const {code} = compile(source, { file: filename });
+    const {code} = compile(source, { file: filename })
 
     return transform(code, {
       presets: [
@@ -24,6 +22,4 @@ var register = () => addHook(
     }).code
   },
   { exts: ['.riot'] }
-);
-
-module.exports = register;
+)

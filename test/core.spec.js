@@ -1,6 +1,8 @@
 const register = require('../register')
 const {expect} = require('chai')
-const render = require('../')
+const ssr = require('../')
+const render = ssr.default
+const fragments = ssr.fragments
 
 describe('ssr', () => {
   let unregister // eslint-disable-line
@@ -30,5 +32,13 @@ describe('ssr', () => {
     const ParentComponent = require('./tags/parent-component.riot').default
 
     expect(render('my-component', ParentComponent)).to.match(/<p>hello/)
+  })
+
+  it('can get rendered css and html', function() {
+    const ParentComponent = require('./tags/parent-component.riot').default
+    const { html, css } = fragments('my-component', ParentComponent)
+
+    expect(html).to.match(/<p>hello/)
+    expect(css).to.match(/red/)
   })
 })
