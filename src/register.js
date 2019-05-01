@@ -1,6 +1,6 @@
-const {addHook} = require('pirates')
-const {transform} = require('@babel/core')
-const {compile} = require('@riotjs/compiler')
+import {addHook} from 'pirates'
+import {compile} from '@riotjs/compiler'
+import {transform} from '@babel/core'
 
 // returns the teardown function
 export default () => addHook(
