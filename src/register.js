@@ -21,5 +21,5 @@ export default () => addHook(
       ]
     }).code
   },
-  { exts: ['.riot'] }
+  { exts: ['.riot'], ignoreNodeModules: false }
 )
