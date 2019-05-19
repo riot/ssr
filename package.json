@@ -38,13 +38,13 @@
   "dependencies": {
     "@babel/core": "^7.4.4",
     "curri": "^1.0.1",
-    "jsdom": "^15.0.0",
+    "jsdom": "^15.1.0",
     "jsdom-global": "^3.0.2",
     "pirates": "^4.0.1",
     "@babel/preset-env": "^7.4.4"
   },
   "peerDependencies": {
-    "@riotjs/compiler": "^4.0.0",
+    "@riotjs/compiler": "^4.1.1",
     "riot": "^4.0.0-rc.5"
   },
   "devDependencies": {
@@ -52,6 +52,6 @@
     "eslint": "^5.16.0",
     "eslint-config-riot": "^2.0.0",
     "mocha": "^6.1.4",
-    "rollup": "^1.10.1"
+    "rollup": "^1.12.3"
   }
 }
