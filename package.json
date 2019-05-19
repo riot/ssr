@@ -1,6 +1,6 @@
 {
   "name": "@riotjs/ssr",
-  "version": "4.0.0-rc.2",
+  "version": "4.0.0-rc.3",
   "description": "Riot module to render riot components on the server",
   "main": "index.js",
   "files": [
@@ -44,7 +44,7 @@
     "@babel/preset-env": "^7.4.4"
   },
   "peerDependencies": {
-    "@riotjs/compiler": "^4.1.1",
+    "@riotjs/compiler": "^4.2.0",
     "riot": "^4.0.0-rc.5"
   },
   "devDependencies": {
