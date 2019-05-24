@@ -41,4 +41,12 @@ describe('ssr', () => {
     expect(html).to.match(/<p>hello/)
     expect(css).to.match(/red/)
   })
+
+  it('can render inputs', function(){
+    const InputComponent = require('./tags/simple-input.riot').default
+    const result = render('div', InputComponent)
+    expect(result).to.match(/value="test"/)
+  })
+
+
 })
