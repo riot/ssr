@@ -1,9 +1,12 @@
 <simple-input>
   <input value={state.val} />
+  <input type="checkbox" checked={state.checked} />
+  <input type="radio" checked={state.checked} />
   <script>
     export default {
       state: {
-        val: 'test'
+        val: 'test',
+        checked: true
       }
     }
   </script>
