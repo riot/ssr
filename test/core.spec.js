@@ -50,5 +50,12 @@ describe('ssr', () => {
     expect(result).to.match(/type="radio"(.*)checked/)
   })
 
+  it('omits password inputs', function(){
+    const InputComponent = require('./tags/password-input.riot').default
+    const result = render('div', InputComponent)
+    expect(result).to.match(/input value=""/)
+    expect(result).to.match(/type="password"(.*)value=""/)
+  })
+
 
 })
