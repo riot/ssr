@@ -17,6 +17,14 @@ function createRenderer(renderer, tagName, componentAPI, props = {}) {
   const cleanup = jsDOMGlobal()
   const root = document.createElement(tagName)
   const element = component(componentAPI)(root, props)
+
+  //reflect input value prop to attribute
+  element.$$('input,textarea').map((el) => {
+    if(el.value) {
+      el.setAttribute('value', el.value)
+    }
+  })
+
   const result = renderer({
     // serialize the component outer html
     html: root.outerHTML,
