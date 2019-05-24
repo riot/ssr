@@ -19,7 +19,7 @@ function createRenderer(renderer, tagName, componentAPI, props = {}) {
   const element = component(componentAPI)(root, props)
 
   //reflect input value prop to attribute
-  element.$$('input,textarea').map((el) => {
+  element.$$('input,textarea,select,option').map((el) => {
     if(el.value) {
       el.setAttribute('value', el.value)
     }
