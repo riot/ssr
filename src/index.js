@@ -5,6 +5,24 @@ import jsDOMGlobal from 'jsdom-global'
 
 const {CSS_BY_NAME} = __.cssManager
 
+const INPUT_ELEMENTS_SELECTOR = 'input,textarea,select,option'
+const INPUT_PASSWORD_TYPE = 'password'
+const VALUE_ATTRIBUTE = 'value'
+
+/**
+ * Set the value attribute of all the inputs
+ * @param {HTMLElement} element - root node
+ * @return {HTMLElement[]} list of the matched input elements
+ */
+function setUserInputAttributes(element) {
+  return element.$$(INPUT_ELEMENTS_SELECTOR).map(el => {
+    const value = el.type !== INPUT_PASSWORD_TYPE ? el.value : ''
+    el.setAttribute(VALUE_ATTRIBUTE, value || '')
+
+    return el
+  })
+}
+
 /**
  * Create the renderer function that can produce different types of output from the DOM rendered
  * @param   {Function} renderer - rendering function
@@ -19,10 +37,7 @@ function createRenderer(renderer, tagName, componentAPI, props = {}) {
   const element = component(componentAPI)(root, props)
 
   //reflect input value prop to attribute
-  element.$$('input,textarea,select,option').map((el) => {
-    const value = el.type !== 'password' ? el.value : ''
-    el.setAttribute('value', value || '')
-  })
+  setUserInputAttributes(element)
 
   const result = renderer({
     // serialize the component outer html
