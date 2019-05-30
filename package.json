@@ -1,6 +1,6 @@
 {
   "name": "@riotjs/ssr",
-  "version": "4.0.0-rc.4",
+  "version": "4.0.0",
   "description": "Riot module to render riot components on the server",
   "main": "index.js",
   "files": [
@@ -9,7 +9,7 @@
     "src"
   ],
   "scripts": {
-    "prepare": "npm i --no-save riot@4.0.0-rc.18 @riotjs/compiler",
+    "prepare": "npm i --no-save riot@4.0.0 @riotjs/compiler",
     "build-core": "npx rollup -f cjs -i src/index.js -o index.js",
     "build-register": "npx rollup -f cjs -i src/register.js -o register.js",
     "build": "npm run build-core && npm run build-register",
@@ -38,20 +38,20 @@
   "dependencies": {
     "@babel/core": "^7.4.5",
     "curri": "^1.0.1",
-    "jsdom": "^15.1.0",
+    "jsdom": "^15.1.1",
     "jsdom-global": "^3.0.2",
     "pirates": "^4.0.1",
     "@babel/preset-env": "^7.4.5"
   },
   "peerDependencies": {
-    "@riotjs/compiler": "^4.2.2",
-    "riot": "^4.0.0-rc.18"
+    "@riotjs/compiler": "^4.2.3",
+    "riot": "^4.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "eslint-config-riot": "^2.0.0",
     "mocha": "^6.1.4",
-    "rollup": "^1.12.3"
+    "rollup": "^1.12.5"
   }
 }
