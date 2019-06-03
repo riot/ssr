@@ -3,7 +3,7 @@ import {compile} from '@riotjs/compiler'
 import {transform} from '@babel/core'
 
 // returns the teardown function
-export default () => addHook(
+export default (options) => addHook(
   function(source, filename) {
     const {code} = compile(source, { file: filename })
 
@@ -21,5 +21,5 @@ export default () => addHook(
       ]
     }).code
   },
-  { exts: ['.riot'], ignoreNodeModules: false }
+  Object.assign({ exts: ['.riot'], ignoreNodeModules: false }, options)
 )
