@@ -58,6 +58,8 @@ describe('ssr', () => {
   })
 
   it('can require and render legacy .tag file', function(){
+    unregister()
+    unregister = register({ exts: ['.tag'] })
     const LegacyComponent = require('./tags/legacy.tag').default
     const result = render('div', LegacyComponent, {message:'tag file rendered successfully'})
     expect(result).to.match(/tag file rendered successfully/)

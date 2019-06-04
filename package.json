@@ -9,7 +9,7 @@
     "src"
   ],
   "scripts": {
-    "prepare": "npm i --no-save riot@4.0.0 @riotjs/compiler",
+    "prepare": "npm i --no-save riot@4 @riotjs/compiler@4",
     "build-core": "npx rollup -f cjs -i src/index.js -o index.js",
     "build-register": "npx rollup -f cjs -i src/register.js -o register.js",
     "build": "npm run build-core && npm run build-register",
@@ -44,14 +44,14 @@
     "@babel/preset-env": "^7.4.5"
   },
   "peerDependencies": {
-    "@riotjs/compiler": "^4.2.3",
-    "riot": "^4.0.0"
+    "@riotjs/compiler": "^4.2.5",
+    "riot": "^4.0.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "eslint-config-riot": "^2.0.0",
     "mocha": "^6.1.4",
-    "rollup": "^1.12.5"
+    "rollup": "^1.13.1"
   }
 }

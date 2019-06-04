@@ -21,5 +21,9 @@ export default (options) => addHook(
       ]
     }).code
   },
-  Object.assign({ exts: ['.riot'], ignoreNodeModules: false }, options)
+  {
+    exts: ['.riot'],
+    ignoreNodeModules: false,
+    ...options
+  }
 )
