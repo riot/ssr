@@ -125,6 +125,19 @@ import MyComponent from './my-component.riot' // it works!
 unregister()
 ```
 
+### Advanced tips
+
+The components rendering is handled via [jsdom-global](https://github.com/rstacruz/jsdom-global), if you want to initialize jsdom passing custom arguments you can do it as it follows:
+
+```js
+render('my-component', MyComponent, { some: 'initial props' },
+  // jsdom options
+  {
+    url: 'https://localhost:3000'
+  }
+)
+```
+
 [travis-image]:https://img.shields.io/travis/riot/ssr.svg?style=flat-square
 [travis-url]:https://travis-ci.org/riot/ssr
 
