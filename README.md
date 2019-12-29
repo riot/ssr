@@ -26,6 +26,70 @@ import render from '@riotjs/ssr'
 const html = render('my-component', MyComponent, { some: 'initial props' })
 ```
 
+Notice that components rendered on the server will **always automatically receive the `isServer=true` property**.
+
+### renderAsync - to handle asynchronous rendering
+
+Components that can not be rendered synchronously must expose the `onAsyncRendering` method to the `renderAsync` function. For example:
+
+```html
+<async-component>
+  <p>{ state.username }<p>
+
+  <script>
+    export default {
+      onBeforeMount({ isServer }) {
+        // if it's not SSR we load the user data right the way
+        if (!isServer) {
+          this.loadUser()
+        }
+      },
+      loadUser() {
+        return fetch('/user/name').then(({name}) => {
+          this.update({ name })
+        })
+      },
+      // this function will be automatically called only
+      // if the component is rendered via `renderAsync`
+      onAsyncRendering() {
+        return this.loadUser()
+      }
+    }
+  </script>
+</async-component>
+```
+
+The above component can be rendered on the server as it follows:
+
+```js
+import MyComponent from './async-component.riot'
+import {renderAsync} from '@riotjs/ssr'
+
+renderAsync('async-component', MyComponent, { some: 'initial props' }).then(html => {
+  console.log(html)
+})
+```
+
+Notice that the `onAsyncRendering` can either return a promise or use the resolve, reject callbacks:
+
+```js
+export default {
+  // this is ok
+  async onAsyncRendering() {
+    await loadData()
+  }
+}
+```
+
+```js
+export default {
+  // this is also ok
+  onAsyncRendering(resolve, reject) {
+    setTimeout(resolve, 1000)
+  }
+}
+```
+
 ### fragments - to render html and css
 
 You can also extract the rendered `html` and `css` separately using the `fragments` function:
@@ -36,6 +100,10 @@ import {fragments} from '@riotjs/ssr'
 
 const {html, css} = fragments('my-component', MyComponent, { some: 'initial props' })
 ```
+
+### renderAsyncFragments - to handle asynchronous fragments rendering
+
+It works like the method above but asynchronously
 
 ### register - to load riot components in node
 

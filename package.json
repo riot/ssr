@@ -9,7 +9,6 @@
     "src"
   ],
   "scripts": {
-    "prepare": "npm i --no-save riot@4 @riotjs/compiler@4",
     "build-core": "npx rollup -f cjs -i src/index.js -o index.js",
     "build-register": "npx rollup -f cjs -i src/register.js -o register.js",
     "build": "npm run build-core && npm run build-register",
@@ -36,22 +35,24 @@
   },
   "homepage": "https://github.com/riot/ssr#readme",
   "dependencies": {
-    "@babel/core": "^7.6.0",
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
     "curri": "^1.0.1",
-    "jsdom": "^15.1.1",
+    "jsdom": "^15.2.1",
     "jsdom-global": "^3.0.2",
-    "pirates": "^4.0.1",
-    "@babel/preset-env": "^7.6.0"
+    "pirates": "^4.0.1"
   },
   "peerDependencies": {
-    "@riotjs/compiler": "^4.3.11",
-    "riot": "^4.5.0"
+    "@riotjs/compiler": "^4.5.4",
+    "riot": "^4.8.0"
   },
   "devDependencies": {
+    "@riotjs/compiler": "^4.5.4",
+    "riot": "^4.8.0",
     "chai": "^4.2.0",
-    "eslint": "^6.4.0",
+    "eslint": "^6.8.0",
     "eslint-config-riot": "^3.0.0",
-    "mocha": "^6.2.0",
-    "rollup": "^1.21.3"
+    "mocha": "^6.2.2",
+    "rollup": "^1.27.14"
   }
 }

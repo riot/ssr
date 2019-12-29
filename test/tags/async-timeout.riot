@@ -1,0 +1,11 @@
+<async-timeout>
+  <p>hello</p>
+
+  <script>
+    export default {
+      onAsyncRendering(resolve) {
+        setTimeout(resolve, 5000)
+      }
+    }
+  </script>
+</async-timeout>

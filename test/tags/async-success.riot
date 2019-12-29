@@ -1,0 +1,11 @@
+<async-success>
+  <p>hello</p>
+
+  <script>
+    export default {
+      onAsyncRendering(resolve) {
+        setTimeout(resolve, 1000)
+      }
+    }
+  </script>
+</async-success>

@@ -2,7 +2,7 @@ const register = require('../register')
 const {expect} = require('chai')
 const ssr = require('../')
 const render = ssr.default
-const fragments = ssr.fragments
+const { renderAsync, renderAsyncFragments, fragments, asyncRenderTimeout } = ssr
 
 describe('ssr', () => {
   let unregister // eslint-disable-line
@@ -57,6 +57,46 @@ describe('ssr', () => {
     expect(result).to.match(/type="password"(.*)value=""/)
   })
 
+  it('render async a component', function(done) {
+    const AsyncSuccess = require('./tags/async-success.riot').default
+    renderAsync('div', AsyncSuccess).then(html => {
+      expect(html).to.match(/<p>hello/)
+      done()
+    })
+  })
+
+  it('render async fragments a component', function(done) {
+    const AsyncSuccess = require('./tags/async-success.riot').default
+    renderAsyncFragments('div', AsyncSuccess).then(({html}) => {
+      expect(html).to.match(/<p>hello/)
+      done()
+    })
+  })
+
+  it('render async a component using promises', function(done) {
+    const AsyncAwaitSuccess = require('./tags/async-await-success.riot').default
+    renderAsync('div', AsyncAwaitSuccess).then(html => {
+      expect(html).to.match(/<p>hello/)
+      done()
+    })
+  })
+
+  it('fail if an async rendering times out', function(done) {
+    this.timeout(asyncRenderTimeout + 1000)
+
+    const AsyncTimeout = require('./tags/async-timeout.riot').default
+    renderAsync('div', AsyncTimeout).catch(error => {
+      expect(error.message).to.match(/Timeout error/)
+      done()
+    })
+  })
+
+  it('fail if an async rendering can\'t be executed', function() {
+    const InputComponent = require('./tags/password-input.riot').default
+
+    expect(() => renderAsync('div', InputComponent)).to.throw()
+  })
+
   it('can require and render legacy .tag file', function(){
     unregister()
     unregister = register({ exts: ['.tag'] })
@@ -64,5 +104,4 @@ describe('ssr', () => {
     const result = render('div', LegacyComponent, {message:'tag file rendered successfully'})
     expect(result).to.match(/tag file rendered successfully/)
   })
-
 })
