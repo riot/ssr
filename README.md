@@ -90,6 +90,8 @@ export default {
 }
 ```
 
+**IMPORTANT** nested `onAsyncRendering` on children components are not supported!
+
 ### fragments - to render html and css
 
 You can also extract the rendered `html` and `css` separately using the `fragments` function:
