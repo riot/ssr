@@ -173,7 +173,7 @@ Of course you can use only once the ones used by Riot.js to customize your compo
 
 <html>
     <head>
-        <!-- that's allowed -->
+        <!-- allowed -->
         <script src='path/to/some/script.js'></script>
 
         <!-- not allowed -->
@@ -185,9 +185,22 @@ Of course you can use only once the ones used by Riot.js to customize your compo
             const globalstuff = {}
         </script>
     </head>
+
     <body>
         <!-- application html -->
     </body>
+
+    <!-- allowed -->
+    <script>
+        export default {
+            // app code
+        }
+    </script>
+    
+    <!-- allowed -->
+    <style>
+        :host {}
+    </style>
 </html>
 ```
  
