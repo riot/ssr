@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "build-core": "npx rollup -f cjs -i src/index.js -o index.js",
-    "build-register": "npx rollup -f cjs -i src/register.js -o register.js",
+    "build-register": "npx rollup --exports auto -f cjs -i src/register.js -o register.js",
     "build": "npm run build-core && npm run build-register",
     "prepublishOnly": "npm test",
     "pretest": "npm run build",
@@ -42,11 +42,11 @@
     "pirates": "^4.0.1"
   },
   "peerDependencies": {
-    "@riotjs/compiler": "^4.9.3",
+    "@riotjs/compiler": "^4.10.0",
     "riot": "^4.13.4"
   },
   "devDependencies": {
-    "@riotjs/compiler": "^4.9.3",
+    "@riotjs/compiler": "^4.10.0",
     "riot": "^4.13.4",
     "chai": "^4.2.0",
     "eslint": "^7.6.0",

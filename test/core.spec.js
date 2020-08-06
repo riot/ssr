@@ -32,7 +32,7 @@ describe('ssr', () => {
     const RootApp = require('./tags/root-app.riot').default
     const result = render('html', RootApp)
 
-    expect(result).to.be.equal('<!doctype html><html><head><title>hello</title><meta name="description" content="a description" /></head><body><p>hello</p></body></html>')
+    expect(result).to.be.equal('<!doctype html><html><head><title>hello</title><meta name="description" content="a description" /></head><body><p>hello</p><script src="https://path.to/riot.js"></script></body></html>')
   })
 
   it('nested components can be rendered', function() {

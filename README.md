@@ -154,7 +154,7 @@ If you want to render your whole document you can simply pass `html` as name of 
 </html>
 ```
 
-It can be rendered as follows:
+It can be rendered as it follows:
 
 ```js
 import MyRootApplication from './my-root-application.riot'
