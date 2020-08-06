@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>{ state.message }</title>
+        <meta each={ meta in state.meta } {...meta}/>
+    </head>
+
+    <body>
+        <p>{ state.message }</p>
+    </body>
+
+    <script>
+        export default {
+          state: {
+            message: 'hello',
+            meta: [{
+              name: 'description',
+              content: 'a description'
+            }]
+          }
+        }
+    </script>
+</html>

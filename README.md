@@ -32,7 +32,7 @@ Notice that components rendered on the server will **always automatically receiv
 
 Components that can not be rendered synchronously must expose the `onAsyncRendering` method to the `renderAsync` function. For example:
 
-```html
+```riot
 <async-component>
   <p>{ state.username }<p>
 
@@ -127,15 +127,40 @@ unregister()
 
 ### Advanced tips
 
-The components rendering is handled via [jsdom-global](https://github.com/rstacruz/jsdom-global), if you want to initialize jsdom passing custom arguments you can do it as it follows:
+If you want to render your whole document you can simply pass `html` as name of your root node. For example
+
+```riot
+<html>
+    <head>
+        <title>{ state.message }</title>
+        <meta each={ meta in state.meta } {...meta}/>
+    </head>
+
+    <body>
+        <p>{ state.message }</p>
+    </body>
+
+    <script>
+        export default {
+          state: {
+            message: 'hello',
+            meta: [{
+              name: 'description',
+              content: 'a description'
+            }]
+          }
+        }
+    </script>
+</html>
+```
+
+It can be rendered as follows:
 
 ```js
-render('my-component', MyComponent, { some: 'initial props' },
-  // jsdom options
-  {
-    url: 'https://localhost:3000'
-  }
-)
+import MyRootApplication from './my-root-application.riot'
+import render from '@riotjs/ssr'
+
+const html = render('html', MyRootApplication) 
 ```
 
 [travis-image]:https://img.shields.io/travis/riot/ssr.svg?style=flat-square

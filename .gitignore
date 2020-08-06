@@ -60,3 +60,6 @@ typings/
 
 # the generated output
 /*.js
+
+# editor config files
+.idea/
