@@ -138,6 +138,7 @@ If you want to render your whole document you can simply pass `html` as name of 
 
     <body>
         <p>{ state.message }</p>
+        <script src='path/to/a/script.js'></script>
     </body>
 
     <script>
@@ -162,6 +163,34 @@ import render from '@riotjs/ssr'
 
 const html = render('html', MyRootApplication) 
 ```
+
+#### Caveat
+
+If you are rendering your whole HTML you will not be able to use multiple times the inline `<script>` `<style>` tags.
+Of course you can use only once the ones used by Riot.js to customize your components. For example:
+
+```riot
+
+<html>
+    <head>
+        <!-- that's allowed -->
+        <script src='path/to/some/script.js'></script>
+
+        <!-- not allowed -->
+        <style>
+        </style>
+
+        <!-- not allowed -->
+        <script>
+            const globalstuff = {}
+        </script>
+    </head>
+    <body>
+        <!-- application html -->
+    </body>
+</html>
+```
+ 
 
 [travis-image]:https://img.shields.io/travis/riot/ssr.svg?style=flat-square
 [travis-url]:https://travis-ci.org/riot/ssr
