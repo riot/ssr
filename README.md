@@ -170,7 +170,6 @@ If you are rendering your whole HTML you will not be able to use multiple times 
 Of course you can use only once the ones used by Riot.js to customize your components. For example:
 
 ```riot
-
 <html>
     <head>
         <!-- allowed -->
