@@ -35,23 +35,23 @@
   },
   "homepage": "https://github.com/riot/ssr#readme",
   "dependencies": {
-    "@babel/core": "^7.11.1",
-    "@babel/preset-env": "^7.11.0",
+    "@babel/core": "^7.12.7",
+    "@babel/preset-env": "^7.12.7",
     "basichtml": "^2.3.0",
     "curri": "^1.0.1",
     "pirates": "^4.0.1"
   },
   "peerDependencies": {
-    "@riotjs/compiler": "^4.10.0",
-    "riot": "^4.13.4"
+    "@riotjs/compiler": "^5.0.0",
+    "riot": "^5.0.0"
   },
   "devDependencies": {
-    "@riotjs/compiler": "^4.10.0",
-    "riot": "^4.13.4",
+    "@riotjs/compiler": "^5.0.0",
+    "riot": "^5.0.0",
     "chai": "^4.2.0",
-    "eslint": "^7.6.0",
+    "eslint": "^7.14.0",
     "eslint-config-riot": "^3.0.0",
-    "mocha": "^8.1.1",
-    "rollup": "^2.23.0"
+    "mocha": "^8.2.1",
+    "rollup": "^2.33.3"
   }
 }
