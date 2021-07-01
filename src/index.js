@@ -1,5 +1,5 @@
 import './register'
-import './dom'
+import * as dom from './dom'
 import {__, component} from 'riot'
 import curry from 'curri'
 
@@ -41,6 +41,8 @@ function createRenderer(
   componentAPI,
   props = {}
 ) {
+  dom.setup()
+
   const isRootNode = tagName === 'html'
   const root = document.createElement(tagName)
   const element = component(componentAPI)(root, {
@@ -48,6 +50,8 @@ function createRenderer(
     isServer: true
   })
   const dispose = () => {
+    // clear global scope
+    dom.dispose()
     // unmount the component
     element.unmount()
     // remove the old stored css

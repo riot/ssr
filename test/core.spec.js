@@ -111,4 +111,8 @@ describe('ssr', () => {
     const result = render('div', LegacyComponent, {message:'tag file rendered successfully'})
     expect(result).to.match(/tag file rendered successfully/)
   })
+
+  it('does not pollute global scope with dom implementation', function(){
+    expect(global.window).to.be.undefined
+  })
 })
