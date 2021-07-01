@@ -32,7 +32,7 @@ describe('ssr', () => {
     const RootApp = require('./tags/root-app.riot').default
     const result = render('html', RootApp)
 
-    expect(result).to.be.equal('<!doctype html><html><head><title>hello</title><meta name="description" content="a description" /></head><body><p>hello</p><script src="https://path.to/riot.js"></script></body></html>')
+    expect(result).to.be.equal('<!doctype html><html><head><title>hello</title><meta content="a description" name="description"></head><body><p>hello</p><script src="https://path.to/riot.js"></script></body></html>')
   })
 
   it('nested components can be rendered', function() {
@@ -53,15 +53,15 @@ describe('ssr', () => {
     const InputComponent = require('./tags/simple-input.riot').default
     const result = render('div', InputComponent)
     expect(result).to.match(/value="test"/)
-    expect(result).to.match(/type="checkbox"(.*)checked/)
-    expect(result).to.match(/type="radio"(.*)checked/)
+    expect(result).to.match(/checked[^>]+type="checkbox"/)
+    expect(result).to.match(/checked[^>]+type="radio"/)
   })
 
   it('omits password inputs', function(){
     const InputComponent = require('./tags/password-input.riot').default
     const result = render('div', InputComponent)
     expect(result).to.match(/input value=""/)
-    expect(result).to.match(/type="password"(.*)value=""/)
+    expect(result).to.match(/value=""[^>]+type="password"/)
   })
 
   it('render async a component', function(done) {
