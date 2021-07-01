@@ -1,7 +1,11 @@
-// init basic HTML
-import basicHTML from 'basichtml'
+import {parseHTML} from 'linkedom'
 
-// make the Node property global
-global.Node = basicHTML.Node
+const {
+  window,
+  document,
+  Node
+} = parseHTML('<!doctype html><html></html>')
 
-basicHTML.init({})
+global.window = window
+global.document = document
+global.Node = Node
