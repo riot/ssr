@@ -38,7 +38,7 @@
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
     "curri": "^1.0.1",
-    "linkedom": "^0.9.7",
+    "linkedom": "^0.10.0",
     "pirates": "^4.0.1"
   },
   "peerDependencies": {
@@ -52,6 +52,6 @@
     "eslint-config-riot": "^3.0.0",
     "mocha": "^9.0.1",
     "riot": "^5.4.5",
-    "rollup": "^2.52.4"
+    "rollup": "^2.52.7"
   }
 }
