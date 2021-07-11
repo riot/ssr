@@ -38,20 +38,20 @@
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
     "curri": "^1.0.1",
-    "linkedom": "^0.10.0",
+    "linkedom": "^0.11.0",
     "pirates": "^4.0.1"
   },
   "peerDependencies": {
-    "@riotjs/compiler": "^5.0.0",
-    "riot": "^5.0.0"
+    "@riotjs/compiler": "^6.0.0",
+    "riot": "^6.0.0"
   },
   "devDependencies": {
-    "@riotjs/compiler": "^5.0.0",
+    "@riotjs/compiler": "^6.0.0",
     "chai": "^4.3.4",
-    "eslint": "^7.29.0",
+    "eslint": "^7.30.0",
     "eslint-config-riot": "^3.0.0",
-    "mocha": "^9.0.1",
+    "mocha": "^9.0.2",
     "riot": "^5.4.5",
-    "rollup": "^2.52.7"
+    "rollup": "^2.53.1"
   }
 }
