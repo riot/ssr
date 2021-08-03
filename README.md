@@ -176,6 +176,7 @@ This method allows the creation of a rendering function receiving the `{getHTML,
 For example
 
 ```js
+import MyComponent from './my-component.riot'
 import { createRenderer } from '@riotjs/ssr'
 
 const logRendrer = createRenderer(({getHTML, css, dispose, component}) => {
@@ -186,6 +187,9 @@ const logRendrer = createRenderer(({getHTML, css, dispose, component}) => {
   dispose()
   return { html, css }
 })
+
+// use your logRenderer
+const { html, css } = logRendrer('my-component', MyComponent, { some: 'initial props' })
 ```
 
 ### DOM Globals
