@@ -2,7 +2,7 @@ const register = require('../register')
 const {expect} = require('chai')
 const ssr = require('../')
 const render = ssr.default
-const { renderAsync, renderAsyncFragments, fragments, asyncRenderTimeout } = ssr
+const { renderAsync, renderAsyncFragments, fragments, asyncRenderTimeout, domGlobals } = ssr
 
 describe('ssr', () => {
   let unregister // eslint-disable-line
@@ -13,6 +13,24 @@ describe('ssr', () => {
 
   after(() => {
     unregister()
+  })
+
+  it('creates and deletes globals properly', function() {
+    expect(global.window).to.be.not.ok
+    expect(global.document).to.be.not.ok
+    expect(global.Node).to.be.not.ok
+
+    domGlobals.create()
+
+    expect(global.window).to.be.ok
+    expect(global.document).to.be.ok
+    expect(global.Node).to.be.ok
+
+    domGlobals.clear()
+
+    expect(global.window).to.be.not.ok
+    expect(global.document).to.be.not.ok
+    expect(global.Node).to.be.not.ok
   })
 
   it('raw components can be rendered', function() {

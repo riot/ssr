@@ -1,6 +1,11 @@
 import {parseHTML} from 'linkedom'
 
-export function setup() {
+export function create() {
+  // no need to recreate globals
+  if (global.window && global.document && global.Node) {
+    return
+  }
+
   const {
     window,
     document,
@@ -12,10 +17,11 @@ export function setup() {
   global.Node = Node
 }
 
-export function dispose() {
-  if (global.window === undefined) {
+export function clear() {
+  if (!(global.window && global.document && global.Node)) {
     return
   }
+
   global.window = undefined
   global.document = undefined
   global.Node = undefined

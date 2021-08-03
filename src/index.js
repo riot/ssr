@@ -41,7 +41,7 @@ export function createRenderer(
   componentAPI,
   props = {}
 ) {
-  dom.setup()
+  dom.create()
 
   const isRootNode = tagName === 'html'
   const root = document.createElement(tagName)
@@ -51,7 +51,7 @@ export function createRenderer(
   })
   const dispose = () => {
     // clear global scope
-    dom.dispose()
+    dom.clear()
     // unmount the component
     element.unmount()
     // remove the old stored css
@@ -127,6 +127,7 @@ const renderComponentAsync = curry((renderer, rendererPayload) => {
 })
 
 export const asyncRenderTimeout = 3000
+export const domGlobals = dom
 export const renderAsync = curry(createRenderer)(renderComponentAsync(getOnlyHTMLFromRenderer))
 export const renderAsyncFragments = curry(createRenderer)(renderComponentAsync(getFragmentsFromRenderer))
 export const fragments = curry(createRenderer)(getFragmentsFromRenderer)

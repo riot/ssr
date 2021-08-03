@@ -164,6 +164,48 @@ import render from '@riotjs/ssr'
 const html = render('html', MyRootApplication) 
 ```
 
+### Better SSR control using the createRenderer
+
+For a better control over your HTML rendering you might want to use the `createRenderer` factory function. 
+This method allows the creation of a rendering function receiving the `{getHTML, css, dispose, element}` option object.
+- `getHTML`: give you the rendered html of your component as string
+- `css`: the css of your component as string
+- `dispose`: clean the memory used on the server needed to render your component
+- `element`: the component instance you are mounting
+
+For example
+
+```js
+import { createRenderer } from '@riotjs/ssr'
+
+const logRendrer = createRenderer(({getHTML, css, dispose, component}) => {
+  const html = getHTML()
+  
+  console.log('Rendering the component: %s', component.name)
+  
+  dispose()
+  return { html, css }
+})
+```
+
+### DOM Globals
+
+`@riotjs/ssr` needs DOM globals (like `window`, `document` ...) to properly render your markup. 
+With the `domGlobals` exported object you can decide manually when the globals should be created and deleted from in your node applications.
+
+```js
+import { domGlobals } from '@riotjs/ssr'
+
+domGlobals.create()
+
+// global DOM object in your node environement are now defined 
+console.log(global.window, global.document) 
+
+// they will be cleared and will be undefined
+domGlobals.clear()
+```
+
+
 #### Caveat
 
 If you are rendering your whole HTML you will not be able to use multiple times the inline `<script>` `<style>` tags.
