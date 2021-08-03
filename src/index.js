@@ -12,6 +12,10 @@ const VALUE_ATTRIBUTE = 'value'
 
 // check if a DOM node has the attribute type='password'
 const hasPasswordAttributeType = el => el.attributes.some(attr => attr.name === ATTRIBUTE_TYPE_NAME && attr.value === INPUT_PASSWORD_TYPE)
+// defer the some callbacks if the rendering is async
+const defer = callback => global.window && global.window.requestAnimationFrame ? global.window.requestAnimationFrame(callback) : setTimeout(callback)
+// call the dispose method asynchronously for the async rendering
+const handleDisposeCallback = (isAsync, dispose) => isAsync ? defer(dispose) : dispose()
 
 /**
  * Set the value attribute of all the inputs
@@ -50,12 +54,12 @@ export function createRenderer(
     isServer: true
   })
   const dispose = () => {
-    // clear global scope
-    dom.clear()
     // unmount the component
     element.unmount()
     // remove the old stored css
     CSS_BY_NAME.clear()
+    // clear global scope
+    dom.clear()
   }
 
   //reflect input value prop to attribute
@@ -75,11 +79,12 @@ export function createRenderer(
  * Get only the html string from a renderer function
  * @param   {Function} options.getHTML - function getting the component html
  * @param   {Function} options.dispose - teardown function
+ * @param   {boolean} isAsync - true if the rendering was handled asynchronously
  * @returns {string} component html
  */
-const getOnlyHTMLFromRenderer = ({getHTML, dispose}) => {
+const getOnlyHTMLFromRenderer = ({getHTML, dispose}, isAsync) => {
   const html = getHTML()
-  dispose()
+  handleDisposeCallback(isAsync, dispose)
   return html
 }
 
@@ -88,11 +93,12 @@ const getOnlyHTMLFromRenderer = ({getHTML, dispose}) => {
  * @param   {Function} options.getHTML - function getting the component html
  * @param   {Function} options.dispose - teardown function
  * @param   {string} options.css - component css
+ * @param   {boolean} isAsync - true if the rendering was handled asynchronously
  * @returns {Object} {html, css} html and css of the rendered component
  */
-const getFragmentsFromRenderer = ({getHTML, dispose, css}) => {
+const getFragmentsFromRenderer = ({getHTML, dispose, css}, isAsync) => {
   const html = getHTML()
-  dispose()
+  handleDisposeCallback(isAsync, dispose)
   return {html, css}
 }
 
@@ -128,8 +134,12 @@ const renderComponentAsync = curry((renderer, rendererPayload) => {
 
 export const asyncRenderTimeout = 3000
 export const domGlobals = dom
-export const renderAsync = curry(createRenderer)(renderComponentAsync(getOnlyHTMLFromRenderer))
-export const renderAsyncFragments = curry(createRenderer)(renderComponentAsync(getFragmentsFromRenderer))
+export const renderAsync = curry(createRenderer)(
+  renderComponentAsync(rendererPayload => getOnlyHTMLFromRenderer(rendererPayload, true))
+)
+export const renderAsyncFragments = curry(createRenderer)(
+  renderComponentAsync(rendererPayload => getFragmentsFromRenderer(rendererPayload, true))
+)
 export const fragments = curry(createRenderer)(getFragmentsFromRenderer)
 export const render = curry(createRenderer)(getOnlyHTMLFromRenderer)
 
