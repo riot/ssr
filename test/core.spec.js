@@ -3,6 +3,7 @@ const {expect} = require('chai')
 const ssr = require('../')
 const render = ssr.default
 const { renderAsync, renderAsyncFragments, fragments, asyncRenderTimeout, domGlobals } = ssr
+const { JSDOM } = require('jsdom')
 
 describe('ssr', () => {
   let unregister // eslint-disable-line
@@ -132,5 +133,45 @@ describe('ssr', () => {
 
   it('does not pollute global scope with dom implementation', function(){
     expect(global.window).to.be.undefined
+  })
+
+  it('can be configured', function(){
+    let createCalled = false // eslint-disable-line
+    let clearCalled = false // eslint-disable-line
+    expect(ssr.configure({
+      create() {
+        createCalled = true
+
+        // no need to recreate globals
+        if (global.window && global.document && global.Node) {
+          return
+        }
+
+        const { window } = new JSDOM('')
+
+        global.window = window
+        global.document = window.document
+        global.Node = window.Node
+      },
+      clear() {
+        clearCalled = true
+
+        if (!(global.window && global.document && global.Node)) {
+          return
+        }
+
+        global.window = undefined
+        global.document = undefined
+        global.Node = undefined
+      }
+    })).to.not.throw
+
+    const RootApp = require('./tags/root-app.riot').default
+    const result = render('html', RootApp)
+
+    expect(result).to.be.equal('<!doctype html><html><head><title>hello</title><meta content="a description" name="description"></head><body><p>hello</p><script src="https://path.to/riot.js"></script></body></html>')
+
+    expect(createCalled).to.be.true
+    expect(clearCalled).to.be.true
   })
 })

@@ -143,4 +143,6 @@ export const renderAsyncFragments = curry(createRenderer)(
 export const fragments = curry(createRenderer)(getFragmentsFromRenderer)
 export const render = curry(createRenderer)(getOnlyHTMLFromRenderer)
 
+export const { configure } = dom
+
 export default render
