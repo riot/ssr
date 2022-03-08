@@ -138,7 +138,10 @@ export const renderAsync = curry(createRenderer)(
   renderComponentAsync(rendererPayload => getOnlyHTMLFromRenderer(rendererPayload, true))
 )
 export const renderAsyncFragments = curry(createRenderer)(
-  renderComponentAsync(rendererPayload => getFragmentsFromRenderer(rendererPayload, true))
+  renderComponentAsync(rendererPayload => {
+    rendererPayload.css = [...CSS_BY_NAME.values()].join('\n')
+    return getFragmentsFromRenderer(rendererPayload, true)
+  })
 )
 export const fragments = curry(createRenderer)(getFragmentsFromRenderer)
 export const render = curry(createRenderer)(getOnlyHTMLFromRenderer)
