@@ -20,13 +20,16 @@ npm i -S riot @riotjs/compiler @riotjs/ssr
 You can simply render your components' markup as it follows:
 
 ```js
-import MyComponent from './my-component.riot'
+import MyComponent from './my-component.js'
 import render from '@riotjs/ssr'
 
 const html = render('my-component', MyComponent, { some: 'initial props' })
 ```
 
-Notice that components rendered on the server will **always automatically receive the `isServer=true` property**.
+*Important* If you want to import raw `.riot` components in your application you might want to [read this](https://github.com/riot/ssr#register---to-load-riot-components-in-node)
+
+*Notice* that components rendered on the server will **always automatically receive the `isServer=true` property**.
+
 
 ### renderAsync - to handle asynchronous rendering
 
@@ -62,7 +65,7 @@ Components that can not be rendered synchronously must expose the `onAsyncRender
 The above component can be rendered on the server as it follows:
 
 ```js
-import MyComponent from './async-component.riot'
+import MyComponent from './async-component.js'
 import {renderAsync} from '@riotjs/ssr'
 
 renderAsync('async-component', MyComponent, { some: 'initial props' }).then(html => {
@@ -97,7 +100,7 @@ export default {
 You can also extract the rendered `html` and `css` separately using the `fragments` function:
 
 ```js
-import MyComponent from './my-component.riot'
+import MyComponent from './my-component.js'
 import {fragments} from '@riotjs/ssr'
 
 const {html, css} = fragments('my-component', MyComponent, { some: 'initial props' })
@@ -140,7 +143,7 @@ If you want to render your whole document you can simply pass `html` as name of 
 It can be rendered as it follows:
 
 ```js
-import MyRootApplication from './my-root-application.riot'
+import MyRootApplication from './my-root-application.js'
 import render from '@riotjs/ssr'
 
 const html = render('html', MyRootApplication) 
@@ -158,7 +161,7 @@ This method allows the creation of a rendering function receiving the `{getHTML,
 For example
 
 ```js
-import MyComponent from './my-component.riot'
+import MyComponent from './my-component.js'
 import { createRenderer } from '@riotjs/ssr'
 
 const logRendrer = createRenderer(({getHTML, getCSS, dispose, component}) => {
