@@ -60,6 +60,7 @@ typings/
 
 # the generated output
 /*.js
+!/rollup.config.js
 
 # editor config files
 .idea/
