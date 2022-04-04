@@ -1,4 +1,3 @@
-import './register'
 import * as dom from './dom'
 import {__, component} from 'riot'
 import curry from 'curri'
@@ -12,7 +11,7 @@ const VALUE_ATTRIBUTE = 'value'
 
 // check if a DOM node has the attribute type='password'
 const hasPasswordAttributeType = el => el.attributes.some(attr => attr.name === ATTRIBUTE_TYPE_NAME && attr.value === INPUT_PASSWORD_TYPE)
-// defer the some callbacks if the rendering is async
+// defer callbacks if the rendering is async
 const defer = callback => global.window && global.window.requestAnimationFrame ? global.window.requestAnimationFrame(callback) : setTimeout(callback)
 // call the dispose method asynchronously for the async rendering
 const handleDisposeCallback = (isAsync, dispose) => isAsync ? defer(dispose) : dispose()
@@ -71,7 +70,7 @@ export function createRenderer(
     dispose,
     element,
     // serialize all the generated css
-    css: [...CSS_BY_NAME.values()].join('\n')
+    getCSS: () => [...CSS_BY_NAME.values()].join('\n')
   })
 }
 
@@ -96,8 +95,9 @@ const getOnlyHTMLFromRenderer = ({getHTML, dispose}, isAsync) => {
  * @param   {boolean} isAsync - true if the rendering was handled asynchronously
  * @returns {Object} {html, css} html and css of the rendered component
  */
-const getFragmentsFromRenderer = ({getHTML, dispose, css}, isAsync) => {
+const getFragmentsFromRenderer = ({getHTML, dispose, getCSS}, isAsync) => {
   const html = getHTML()
+  const css = getCSS()
   handleDisposeCallback(isAsync, dispose)
   return {html, css}
 }

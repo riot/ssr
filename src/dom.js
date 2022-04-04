@@ -1,8 +1,18 @@
-import {parseHTML} from 'linkedom'
+import { defineProperty } from '@riotjs/util/objects'
+import { parseHTML } from 'linkedom/worker'
+
+const defineProp = (source, key, value) => defineProperty(source, key, value, {
+  writable: true,
+  enumerable: true
+})
+
+const originalWindow = globalThis.window
+const originalDocument = globalThis.document
+const originalNode = globalThis.Node
 
 export function create() {
   // no need to recreate globals
-  if (global.window && global.document && global.Node) {
+  if (globalThis.window && globalThis.document && globalThis.Node) {
     return
   }
 
@@ -12,17 +22,17 @@ export function create() {
     Node
   } = parseHTML('<!doctype html><html></html>')
 
-  global.window = window
-  global.document = document
-  global.Node = Node
+  defineProp(globalThis, 'window', window)
+  defineProp(globalThis, 'document', document)
+  defineProp(globalThis, 'Node', Node)
 }
 
 export function clear() {
-  if (!(global.window && global.document && global.Node)) {
+  if (!(globalThis.window && globalThis.document && globalThis.Node)) {
     return
   }
 
-  global.window = undefined
-  global.document = undefined
-  global.Node = undefined
+  defineProp(globalThis, 'window', originalWindow)
+  defineProp(globalThis, 'document', originalDocument)
+  defineProp(globalThis, 'Node', originalNode)
 }

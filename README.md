@@ -1,7 +1,7 @@
 # ssr
 Riot module to render riot components on the server
 
-[![Build Status][travis-image]][travis-url]
+[![Build Status][ci-image]][ci-url]
 
 [![NPM version][npm-version-image]][npm-url]
 [![NPM downloads][npm-downloads-image]][npm-url]
@@ -17,7 +17,7 @@ npm i -S riot @riotjs/compiler @riotjs/ssr
 
 ### render - to render only markup
 
-You can simply render your components markup as it follows:
+You can simply render your components' markup as it follows:
 
 ```js
 import MyComponent from './my-component.riot'
@@ -107,24 +107,6 @@ const {html, css} = fragments('my-component', MyComponent, { some: 'initial prop
 
 It works like the method above but asynchronously
 
-### register - to load riot components in node
-
-If you only want load your components source code in a node environement you just need to register the riot loader hook:
-
-```js
-import register from '@riotjs/ssr/register'
-
-import MyComponent from './my-component.riot' // It will fail
-
-// from now on you can load `.riot` tags in node
-const unregister = register()
-
-import MyComponent from './my-component.riot' // it works!
-
-// normally you will not need to call this function but if you want you can unhook the riot loader
-unregister()
-```
-
 ### Advanced tips
 
 If you want to render your whole document you can simply pass `html` as name of your root node. For example
@@ -179,8 +161,9 @@ For example
 import MyComponent from './my-component.riot'
 import { createRenderer } from '@riotjs/ssr'
 
-const logRendrer = createRenderer(({getHTML, css, dispose, component}) => {
+const logRendrer = createRenderer(({getHTML, getCSS, dispose, component}) => {
   const html = getHTML()
+  const css = getCSS()
   
   console.log('Rendering the component: %s', component.name)
   
@@ -209,11 +192,29 @@ console.log(global.window, global.document)
 domGlobals.clear()
 ```
 
+### register - to load riot components in node
+
+If you only want to load directly your `riot` components in your node application you might have a look at [`@riotjs/register`](https://github.com/riot/register)
+For example:
+
+```js
+import register from '@riotjs/register'
+
+import MyComponent from './my-component.riot' // It will fail
+
+// from now on you can load `.riot` tags in node
+const unregister = register()
+
+import MyComponent from './my-component.riot' // it works!
+
+// normally you will not need to call this function but if you want you can unhook the riot loader
+unregister()
+```
 
 #### Caveat
 
 If you are rendering your whole HTML you will not be able to use multiple times the inline `<script>` `<style>` tags.
-Of course you can use only once the ones used by Riot.js to customize your components. For example:
+Of course, you can use only once the ones used by Riot.js to customize your components. For example:
 
 ```riot
 <html>
@@ -250,8 +251,8 @@ Of course you can use only once the ones used by Riot.js to customize your compo
 ```
  
 
-[travis-image]:https://img.shields.io/travis/riot/ssr.svg?style=flat-square
-[travis-url]:https://travis-ci.org/riot/ssr
+[ci-image]:https://img.shields.io/github/workflow/status/riot/ssr/test?style=flat-square
+[ci-url]:https://github.com/riot/ssr/actions
 
 [license-image]:http://img.shields.io/badge/license-MIT-000000.svg?style=flat-square
 [license-url]:LICENSE

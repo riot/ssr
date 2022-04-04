@@ -1,36 +1,29 @@
-const register = require('../register')
 const {expect} = require('chai')
 const ssr = require('../')
 const render = ssr.default
 const { renderAsync, renderAsyncFragments, fragments, asyncRenderTimeout, domGlobals } = ssr
 
 describe('ssr', () => {
-  let unregister // eslint-disable-line
-
-  before(() => {
-    unregister = register({ exts: ['.riot', '.tag'] })
-  })
-
-  after(() => {
-    unregister()
+  afterEach(() => {
+    domGlobals.clear()
   })
 
   it('creates and deletes globals properly', function() {
-    expect(global.window).to.be.not.ok
-    expect(global.document).to.be.not.ok
-    expect(global.Node).to.be.not.ok
+    expect(globalThis.window).to.be.not.ok
+    expect(globalThis.document).to.be.not.ok
+    expect(globalThis.Node).to.be.not.ok
 
     domGlobals.create()
 
-    expect(global.window).to.be.ok
-    expect(global.document).to.be.ok
-    expect(global.Node).to.be.ok
+    expect(globalThis.window).to.be.ok
+    expect(globalThis.document).to.be.ok
+    expect(globalThis.Node).to.be.ok
 
     domGlobals.clear()
 
-    expect(global.window).to.be.not.ok
-    expect(global.document).to.be.not.ok
-    expect(global.Node).to.be.not.ok
+    expect(globalThis.window).to.be.not.ok
+    expect(globalThis.document).to.be.not.ok
+    expect(globalThis.Node).to.be.not.ok
   })
 
   it('raw components can be rendered', function() {
@@ -122,15 +115,7 @@ describe('ssr', () => {
     expect(() => renderAsync('div', InputComponent)).to.throw()
   })
 
-  it('can require and render legacy .tag file', function(){
-    unregister()
-    unregister = register({ exts: ['.tag'] })
-    const LegacyComponent = require('./tags/legacy.tag').default
-    const result = render('div', LegacyComponent, {message:'tag file rendered successfully'})
-    expect(result).to.match(/tag file rendered successfully/)
-  })
-
   it('does not pollute global scope with dom implementation', function(){
-    expect(global.window).to.be.undefined
+    expect(globalThis.window).to.be.undefined
   })
 })
