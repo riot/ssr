@@ -1,6 +1,6 @@
 {
   "name": "@riotjs/ssr",
-  "version": "7.1.1",
+  "version": "7.1.2",
   "description": "Riot module to render riot components on the server",
   "main": "index.js",
   "module": "index.esm.js",
