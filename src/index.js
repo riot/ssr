@@ -23,7 +23,8 @@ const handleDisposeCallback = (isAsync, dispose) => isAsync ? defer(dispose) : d
  */
 function setUserInputAttributes(element) {
   return element.$$(INPUT_ELEMENTS_SELECTOR).map(el => {
-    const value = hasPasswordAttributeType(el) ? '' : el.value
+    const value = hasPasswordAttributeType(el) ? '' : el.value || el.getAttribute(VALUE_ATTRIBUTE)
+
     el.setAttribute(VALUE_ATTRIBUTE, value || '')
 
     return el

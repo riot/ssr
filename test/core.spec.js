@@ -63,7 +63,9 @@ describe('ssr', () => {
   it('can render inputs', function(){
     const InputComponent = require('./tags/simple-input.riot').default
     const result = render('div', InputComponent)
+
     expect(result).to.match(/value="test"/)
+    expect(result).to.match(/value="static-value"/)
     expect(result).to.match(/checked[^>]+type="checkbox"/)
     expect(result).to.match(/checked[^>]+type="radio"/)
   })
