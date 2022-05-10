@@ -1,6 +1,6 @@
 {
   "name": "@riotjs/ssr",
-  "version": "8.0.0",
+  "version": "8.0.1",
   "description": "Riot module to render riot components on the server",
   "main": "index.js",
   "module": "index.esm.js",
@@ -8,7 +8,8 @@
   "files": [
     "index.js",
     "index.esm.js",
-    "index.d.ts"
+    "index.d.ts",
+    "src"
   ],
   "scripts": {
     "build": "npx rollup -c",
@@ -37,7 +38,7 @@
   "dependencies": {
     "@riotjs/util": "^2.0.4",
     "curri": "^1.0.1",
-    "linkedom": "^0.14.8"
+    "linkedom": "^0.14.9"
   },
   "peerDependencies": {
     "riot": "^6.0.0"
@@ -47,10 +48,10 @@
     "@rollup/plugin-commonjs": "^22.0.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "chai": "^4.3.6",
-    "eslint": "^8.14.0",
+    "eslint": "^8.15.0",
     "eslint-config-riot": "^3.0.0",
     "mocha": "^10.0.0",
     "riot": "^6.1.2",
-    "rollup": "^2.72.0"
+    "rollup": "^2.72.1"
   }
 }

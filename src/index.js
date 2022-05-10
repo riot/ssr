@@ -12,7 +12,7 @@ const VALUE_ATTRIBUTE = 'value'
 // check if a DOM node has the attribute type='password'
 const hasPasswordAttributeType = el => el.attributes.some(attr => attr.name === ATTRIBUTE_TYPE_NAME && attr.value === INPUT_PASSWORD_TYPE)
 // defer callbacks if the rendering is async
-const defer = callback => global.window && global.window.requestAnimationFrame ? global.window.requestAnimationFrame(callback) : setTimeout(callback)
+const defer = callback => globalThis.window && globalThis.window.requestAnimationFrame ? globalThis.window.requestAnimationFrame(callback) : setTimeout(callback)
 // call the dispose method asynchronously for the async rendering
 const handleDisposeCallback = (isAsync, dispose) => isAsync ? defer(dispose) : dispose()
 

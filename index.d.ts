@@ -1,4 +1,4 @@
-import { RiotComponentShell } from 'riot';
+import { RiotComponentWrapper } from 'riot'
 
 export interface RenderingFragments {
   html: string
@@ -12,9 +12,9 @@ export interface domGlobals {
 
 export const asyncRenderTimeout: number
 
-export function renderAsync<Props extends unknown> (componentName: string, componentShell: RiotComponentShell<Props>, props?: Props): Promise<string>
-export function renderAsyncFragments<Props extends unknown> (componentName: string, componentShell: RiotComponentShell<Props>, props?: Props): Promise<RenderingFragments>
-export function fragments<Props extends unknown> (componentName: string, componentShell: RiotComponentShell<Props>, props?: Props): RenderingFragments
-export function render<Props extends unknown> (componentName: string, componentShell: RiotComponentShell<Props>, props?: Props): string
+export function renderAsync<Props extends unknown> (componentName: string, componentShell: RiotComponentWrapper<Props>, props?: Props): Promise<string>
+export function renderAsyncFragments<Props extends unknown> (componentName: string, componentShell: RiotComponentWrapper<Props>, props?: Props): Promise<RenderingFragments>
+export function fragments<Props extends unknown> (componentName: string, componentShell: RiotComponentWrapper<Props>, props?: Props): RenderingFragments
+export function render<Props extends unknown> (componentName: string, componentShell: RiotComponentWrapper<Props>, props?: Props): string
 
 export default render
