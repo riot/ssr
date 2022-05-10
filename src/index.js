@@ -1,4 +1,4 @@
-import * as dom from './dom'
+import * as dom from './dom.js'
 import {__, component} from 'riot'
 import curry from 'curri'
 
