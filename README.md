@@ -1,6 +1,8 @@
 # ssr
 Riot module to render riot components on the server
 
+[![Riot.js SSR logo](https://raw.githubusercontent.com/riot/branding/main/ssr/ssr-horizontal.svg)](https://github.com/riot/ssr/)
+
 [![Build Status][ci-image]][ci-url]
 
 [![NPM version][npm-version-image]][npm-url]
