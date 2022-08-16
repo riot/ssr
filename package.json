@@ -36,22 +36,22 @@
   },
   "homepage": "https://github.com/riot/ssr#readme",
   "dependencies": {
-    "@riotjs/util": "^2.0.4",
+    "@riotjs/util": "^2.1.1",
     "curri": "^1.0.1",
-    "linkedom": "^0.14.9"
+    "linkedom": "^0.14.12"
   },
   "peerDependencies": {
-    "riot": "^6.0.0"
+    "riot": "^6.0.0 || ^7.0.0"
   },
   "devDependencies": {
     "@riotjs/register": "^6.0.1",
-    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "chai": "^4.3.6",
-    "eslint": "^8.15.0",
+    "eslint": "^8.22.0",
     "eslint-config-riot": "^3.0.0",
     "mocha": "^10.0.0",
-    "riot": "^6.1.2",
-    "rollup": "^2.72.1"
+    "riot": "^7.0.3",
+    "rollup": "^2.78.0"
   }
 }
