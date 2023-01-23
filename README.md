@@ -258,7 +258,7 @@ Of course, you can use only once the ones used by Riot.js to customize your comp
 ```
  
 
-[ci-image]:https://img.shields.io/github/workflow/status/riot/ssr/test?style=flat-square
+[ci-image]:https://img.shields.io/github/actions/workflow/status/riot/ssr/test.yml?style=flat-square
 [ci-url]:https://github.com/riot/ssr/actions
 
 [license-image]:http://img.shields.io/badge/license-MIT-000000.svg?style=flat-square
