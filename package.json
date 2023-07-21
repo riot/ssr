@@ -1,13 +1,19 @@
 {
   "name": "@riotjs/ssr",
   "version": "8.1.2",
+  "type": "module",
   "description": "Riot module to render riot components on the server",
-  "main": "index.js",
-  "module": "index.esm.js",
+  "main": "index.cjs",
+  "module": "index.js",
   "types": "index.d.ts",
+  "exports": {
+    "import": "./index.js",
+    "require": "./index.cjs",
+    "types": "./index.d.ts"
+  },
   "files": [
+    "index.cjs",
     "index.js",
-    "index.esm.js",
     "index.d.ts",
     "src"
   ],
@@ -15,7 +21,7 @@
     "build": "npx rollup -c",
     "prepublishOnly": "npm test",
     "pretest": "npm run build",
-    "test": "npm run lint && mocha -r @riotjs/register test/*.spec.js",
+    "test": "npm run lint && NODE_OPTIONS=\"--loader @riotjs/register\" mocha test/*.spec.js",
     "lint": "eslint src/*.js test"
   },
   "repository": {
@@ -29,29 +35,31 @@
     "ssr",
     "rendering"
   ],
-  "author": "Gianluca Guarini <gianluca.guarini@gmail.com> (http://gianlucaguarini.com)",
+  "author": "Gianluca Guarini <gianluca.guarini@gmail.com> (https://gianlucaguarini.com)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/riot/ssr/issues"
   },
   "homepage": "https://github.com/riot/ssr#readme",
   "dependencies": {
-    "@riotjs/util": "^2.1.1",
-    "curri": "^1.0.1",
-    "linkedom": "^0.14.12"
+    "@riotjs/util": "^2.2.1",
+    "curri": "^2.0.3",
+    "linkedom": "^0.15.1"
   },
   "peerDependencies": {
-    "riot": "^6.0.0 || ^7.0.0"
+    "riot": "^6.0.0 || ^7.0.0 || ^9.0.0"
   },
   "devDependencies": {
-    "@riotjs/register": "^6.0.1",
-    "@rollup/plugin-commonjs": "^22.0.2",
-    "@rollup/plugin-node-resolve": "^13.3.0",
-    "chai": "^4.3.6",
-    "eslint": "^8.22.0",
-    "eslint-config-riot": "^3.0.0",
-    "mocha": "^10.0.0",
-    "riot": "^7.0.3",
-    "rollup": "^2.78.0"
+    "@riotjs/prettier-config": "^1.1.0",
+    "@riotjs/register": "^9.0.0",
+    "@rollup/plugin-commonjs": "^25.0.3",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "chai": "^4.3.7",
+    "eslint": "^8.45.0",
+    "eslint-config-riot": "^4.1.0",
+    "mocha": "^10.2.0",
+    "prettier": "^3.0.0",
+    "riot": "^9.0.0-rc.3",
+    "rollup": "^3.26.3"
   }
 }

@@ -1,10 +1,11 @@
-import { defineProperty } from '@riotjs/util/objects'
+import { defineProperty } from '@riotjs/util/objects.js'
 import { parseHTML } from 'linkedom/worker'
 
-const defineProp = (source, key, value) => defineProperty(source, key, value, {
-  writable: true,
-  enumerable: true
-})
+const defineProp = (source, key, value) =>
+  defineProperty(source, key, value, {
+    writable: true,
+    enumerable: true,
+  })
 
 const originalWindow = globalThis.window
 const originalDocument = globalThis.document
@@ -16,11 +17,7 @@ export function create() {
     return
   }
 
-  const {
-    window,
-    document,
-    Node
-  } = parseHTML('<!doctype html><html></html>')
+  const { window, document, Node } = parseHTML('<!doctype html><html></html>')
 
   defineProp(globalThis, 'window', window)
   defineProp(globalThis, 'document', document)

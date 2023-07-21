@@ -7,14 +7,17 @@ export default {
   plugins: [
     nodeResolve(),
     commonjs({
-      esmExternals: ['riot']
-    })
+      esmExternals: ['riot'],
+    }),
   ],
-  output: [{
-    format: 'cjs',
-    file: 'index.js'
-  }, {
-    format: 'esm',
-    file: 'index.esm.js',
-  }]
+  output: [
+    {
+      format: 'cjs',
+      file: 'index.cjs',
+    },
+    {
+      format: 'esm',
+      file: 'index.js',
+    },
+  ],
 }

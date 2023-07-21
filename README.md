@@ -4,7 +4,6 @@
 
 Riot module to render riot components on the server
 
-
 [![Build Status][ci-image]][ci-url]
 
 [![NPM version][npm-version-image]][npm-url]
@@ -30,10 +29,9 @@ import render from '@riotjs/ssr'
 const html = render('my-component', MyComponent, { some: 'initial props' })
 ```
 
-*Important* If you want to import raw `.riot` components in your application you might want to [read this](https://github.com/riot/ssr#register---to-load-riot-components-in-node)
+_Important_ If you want to import raw `.riot` components in your application you might want to [read this](https://github.com/riot/ssr#register---to-load-riot-components-in-node)
 
-*Notice* that components rendered on the server will **always automatically receive the `isServer=true` property**.
-
+_Notice_ that components rendered on the server will **always automatically receive the `isServer=true` property**.
 
 ### renderAsync - to handle asynchronous rendering
 
@@ -70,11 +68,13 @@ The above component can be rendered on the server as it follows:
 
 ```js
 import MyComponent from './async-component.js'
-import {renderAsync} from '@riotjs/ssr'
+import { renderAsync } from '@riotjs/ssr'
 
-renderAsync('async-component', MyComponent, { some: 'initial props' }).then(html => {
-  console.log(html)
-})
+renderAsync('async-component', MyComponent, { some: 'initial props' }).then(
+  (html) => {
+    console.log(html)
+  },
+)
 ```
 
 Notice that the `onAsyncRendering` can either return a promise or use the resolve, reject callbacks:
@@ -84,7 +84,7 @@ export default {
   // this is ok
   async onAsyncRendering() {
     await loadData()
-  }
+  },
 }
 ```
 
@@ -93,7 +93,7 @@ export default {
   // this is also ok
   onAsyncRendering(resolve, reject) {
     setTimeout(resolve, 1000)
-  }
+  },
 }
 ```
 
@@ -105,9 +105,11 @@ You can also extract the rendered `html` and `css` separately using the `fragmen
 
 ```js
 import MyComponent from './my-component.js'
-import {fragments} from '@riotjs/ssr'
+import { fragments } from '@riotjs/ssr'
 
-const {html, css} = fragments('my-component', MyComponent, { some: 'initial props' })
+const { html, css } = fragments('my-component', MyComponent, {
+  some: 'initial props',
+})
 ```
 
 ### renderAsyncFragments - to handle asynchronous fragments rendering
@@ -150,13 +152,14 @@ It can be rendered as it follows:
 import MyRootApplication from './my-root-application.js'
 import render from '@riotjs/ssr'
 
-const html = render('html', MyRootApplication) 
+const html = render('html', MyRootApplication)
 ```
 
 ### Better SSR control using the createRenderer
 
-For a better control over your HTML rendering you might want to use the `createRenderer` factory function. 
+For a better control over your HTML rendering you might want to use the `createRenderer` factory function.
 This method allows the creation of a rendering function receiving the `{getHTML, css, dispose, element}` option object.
+
 - `getHTML`: give you the rendered html of your component as string
 - `css`: the css of your component as string
 - `dispose`: clean the memory used on the server needed to render your component
@@ -168,23 +171,25 @@ For example
 import MyComponent from './my-component.js'
 import { createRenderer } from '@riotjs/ssr'
 
-const logRendrer = createRenderer(({getHTML, getCSS, dispose, component}) => {
+const logRendrer = createRenderer(({ getHTML, getCSS, dispose, component }) => {
   const html = getHTML()
   const css = getCSS()
-  
+
   console.log('Rendering the component: %s', component.name)
-  
+
   dispose()
   return { html, css }
 })
 
 // use your logRenderer
-const { html, css } = logRendrer('my-component', MyComponent, { some: 'initial props' })
+const { html, css } = logRendrer('my-component', MyComponent, {
+  some: 'initial props',
+})
 ```
 
 ### DOM Globals
 
-`@riotjs/ssr` needs DOM globals (like `window`, `document` ...) to properly render your markup. 
+`@riotjs/ssr` needs DOM globals (like `window`, `document` ...) to properly render your markup.
 With the `domGlobals` exported object you can decide manually when the globals should be created and deleted from in your node applications.
 
 ```js
@@ -192,8 +197,8 @@ import { domGlobals } from '@riotjs/ssr'
 
 domGlobals.create()
 
-// global DOM object in your node environement are now defined 
-console.log(global.window, global.document) 
+// global DOM object in your node environement are now defined
+console.log(global.window, global.document)
 
 // they will be cleared and will be undefined
 domGlobals.clear()
@@ -249,21 +254,18 @@ Of course, you can use only once the ones used by Riot.js to customize your comp
             // app code
         }
     </script>
-    
+
     <!-- allowed -->
     <style>
         :host {}
     </style>
 </html>
 ```
- 
 
-[ci-image]:https://img.shields.io/github/actions/workflow/status/riot/ssr/test.yml?style=flat-square
-[ci-url]:https://github.com/riot/ssr/actions
-
-[license-image]:http://img.shields.io/badge/license-MIT-000000.svg?style=flat-square
-[license-url]:LICENSE
-
-[npm-version-image]:http://img.shields.io/npm/v/@riotjs/ssr.svg?style=flat-square
-[npm-downloads-image]:http://img.shields.io/npm/dm/@riotjs/ssr.svg?style=flat-square
-[npm-url]:https://npmjs.org/package/@riotjs/ssr
+[ci-image]: https://img.shields.io/github/actions/workflow/status/riot/ssr/test.yml?style=flat-square
+[ci-url]: https://github.com/riot/ssr/actions
+[license-image]: http://img.shields.io/badge/license-MIT-000000.svg?style=flat-square
+[license-url]: LICENSE
+[npm-version-image]: http://img.shields.io/npm/v/@riotjs/ssr.svg?style=flat-square
+[npm-downloads-image]: http://img.shields.io/npm/dm/@riotjs/ssr.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/@riotjs/ssr
