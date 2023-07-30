@@ -31,7 +31,7 @@ const html = render('my-component', MyComponent, { some: 'initial props' })
 
 _Important_ If you want to import raw `.riot` components in your application you might want to [read this](https://github.com/riot/ssr#register---to-load-riot-components-in-node)
 
-_Notice_ that components rendered on the server will **always automatically receive the `isServer=true` property**.
+_Note_ that components rendered on the server will **always automatically receive the `isServer=true` property**.
 
 ### renderAsync - to handle asynchronous rendering
 
@@ -202,25 +202,6 @@ console.log(global.window, global.document)
 
 // they will be cleared and will be undefined
 domGlobals.clear()
-```
-
-### register - to load riot components in node
-
-If you only want to load directly your `riot` components in your node application you might have a look at [`@riotjs/register`](https://github.com/riot/register)
-For example:
-
-```js
-import register from '@riotjs/register'
-
-import MyComponent from './my-component.riot' // It will fail
-
-// from now on you can load `.riot` tags in node
-const unregister = register()
-
-import MyComponent from './my-component.riot' // it works!
-
-// normally you will not need to call this function but if you want you can unhook the riot loader
-unregister()
 ```
 
 #### Caveat
