@@ -29,7 +29,7 @@ import render from '@riotjs/ssr'
 const html = render('my-component', MyComponent, { some: 'initial props' })
 ```
 
-_Important_ If you want to import raw `.riot` components in your application you might want to [read this](https://github.com/riot/ssr#register---to-load-riot-components-in-node)
+_Important_ If you want to import raw `.riot` components in your application you might want to use [@riotjs/register](https://github.com/riot/register)
 
 _Note_ that components rendered on the server will **always automatically receive the `isServer=true` property**.
 
