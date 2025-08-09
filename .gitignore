@@ -59,9 +59,8 @@ typings/
 .env
 
 # the generated output
-/*.js
-/*.cjs
-!/rollup.config.js
+/index.js
+/index.cjs
 
 # editor config files
 .idea/
