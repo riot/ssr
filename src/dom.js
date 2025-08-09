@@ -1,4 +1,4 @@
-import { defineProperty } from '@riotjs/util/objects.js'
+import { defineProperty } from '@riotjs/util/objects'
 import { parseHTML } from 'linkedom/worker'
 
 const defineProp = (source, key, value) =>
